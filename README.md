@@ -1,4 +1,2 @@
-new_project
+Sf phpers summit training project
 ===========
-
-A Symfony project created on September 1, 2017, 1:53 am.
