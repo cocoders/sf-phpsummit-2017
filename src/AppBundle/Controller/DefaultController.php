@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
+use AppBundle\FormType\RegisterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,14 +27,27 @@ class DefaultController extends Controller
      */
     public function registerAction(Request $request)
     {
-        if ($request->isMethod('POST')) {
-            var_dump($request->request->all());
+        $form = $this->createForm(RegisterType::class);
 
-            return new Response('test');
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $objectManager = $this->getDoctrine()->getManager();
+            $objectManager->persist(
+                new User(
+                    $form->get('email')->getData(),
+                    password_hash($form->get('password')->getData(), PASSWORD_BCRYPT)
+                )
+            );
+            $objectManager->flush();
+
+            return $this->redirect('/login.php?successRegister=1');
         }
 
         return $this->render(
-            'default/register.html.twig'
+            'default/register.html.twig',
+            [
+                'form' => $form->createView()
+            ]
         );
     }
 }

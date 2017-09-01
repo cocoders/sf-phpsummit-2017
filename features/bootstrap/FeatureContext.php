@@ -51,18 +51,18 @@ class FeatureContext extends RawMinkContext
      */
     public function iHasAccountWithEmail($email)
     {
-        $this->visitPath('/register.php');
+        $this->visitPath('/app_dev.php/register');
         $this
             ->getSession()
             ->getPage()
-            ->findField('email')
+            ->findField('register[email]')
             ->setValue($email)
         ;
 
         $this
             ->getSession()
             ->getPage()
-            ->findField('password')
+            ->findField('register[password]')
             ->setValue($this->password)
         ;
 

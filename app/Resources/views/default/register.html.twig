@@ -9,25 +9,38 @@
                         <h3 class="panel-title">Register</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="{{ path('register') }}" method="POST">
+                        {{ form_start(form) }}
+                        <fieldset>
+                            <div class="form-group">
+                                {{ form_label(form.email) }}
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.email) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.password) }}
+                                {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.password) }}
+                            </div>
+                            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-lg btn-success btn-block'}}) }}
+                        </fieldset>
+                        {{ form_end(form) }}
+                        {# <form role="form" action="{{ path('register') }}" method="POST">
                             <fieldset>
-                                <div class="form-group {# if (isset($registerErrors['email'])): ?>has-error<?php endif #}">
-                                    {## if (isset($registerErrors['email'])): #}
+                                <div class="form-group">
                                     <label class="control-label" for="login-email">
-                                        {# echo $registerErrors['email'] #}
                                     </label>
                                     <?php endif ?>
                                     <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus id="login-email">
                                 </div>
-                                <div class="form-group {# if (isset($registerErrors['password'])): ?>has-error<?php endif #}">
-                                    {# if (isset($registerErrors['password'])): #}
-                                    <label class="control-label" for="login-email">{# echo $registerErrors['password'] #}</label>
+                                <div class="form-group {# if (isset($registerErrors['password'])): ?>has-error<?php endif">
+                                    {# if (isset($registerErrors['password'])):
+                                    <label class="control-label" for="login-email">{# echo $registerErrors['password'] </label>
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="" id="login-password">
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="submit" class="btn btn-lg btn-success btn-block" value="Register" />
                             </fieldset>
-                        </form>
+                        </form> #}
                     </div>
                 </div>
             </div>

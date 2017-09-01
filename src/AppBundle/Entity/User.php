@@ -39,6 +39,11 @@ class User
      */
     private $address;
 
+    public function __construct(string $email, string $passwordHash)
+    {
+        $this->email = $email;
+        $this->passwordHash = $passwordHash;
+    }
 
     /**
      * Get id
