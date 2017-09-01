@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
         git \
         libpcre3-dev \
         libpq-dev \
+        postgresql-client \
     && docker-php-ext-install -j$(nproc) mcrypt intl zip pdo_pgsql
 
 RUN docker-php-ext-enable opcache
